@@ -1,0 +1,191 @@
+<html>
+    <head>
+        <title>
+            Registration form
+        </title>
+    </head> 
+    <style>
+       
+        form{
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 100%;
+        }
+    body{
+        align-items: center;
+        background-image: url(b3.png);
+        background-size: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        }
+       
+    input{
+            
+        padding: 8px;
+        margin-bottom: 5px;
+        box-sizing: border-box;
+    }
+    input,textarea{
+        border-radius: 5px;
+    }
+   input:hover{
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+
+   }
+   input:hover,
+   textarea:hover{
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+   } 
+   .error{
+    color: red;
+    
+    margin-bottom: 16px;
+   }
+   button{
+    background-color: rgb(122, 110, 110);
+    color: white;
+    border-radius: 5px;
+   }
+   button:hover{
+    box-shadow:0 0 8px rgba(0, 0, 0, 0.5); 
+   }
+    </style>
+    
+   <body>
+    <h1>Registration form</h1>
+    <form id="registrationForm" onsubmit="submission(event)">
+        <label>Name:</label>
+        <input type="text" id="name" size="15" placeholder="Enter your name" required><br><br>
+
+        <label>Username:</label>
+        <input type="text" id="username" size="15" placeholder="Choose a username" required>
+        <div class="error" id="usernameError"></div>
+        
+        <label>Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male" />Male
+        <input type="radio" id="female" name="gender" value="female" />Female
+        <input type="radio" id="others" name="gender" value="others" />others<br><br>
+
+        <label>Phone no.:</label>
+        <input type="text" name="country code" value="+91" size="1"/>
+        <input type="number" id="phone" name="phone" size="10" required>
+        <div class="error" id="phoneError"></div><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" id="email" placeholder="Enter your Email" required>
+        <div class="error" id="emailerror"></div>
+
+        <label>Address:</label><br>
+        <textarea name="address" cols="50" rows="5" required></textarea><br><br>
+
+        <label>Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter a strong password" required>
+        <div class="error" id="passworderror"></div>
+
+        <label>Re-enter Password:</label>
+        <input type="password" id="repassword" name="repassword" placeholder="Re-enter the password" required>
+        <div class="error" id="repassworderror"></div>
+
+        <button type="submit">Submit</button>
+        <button type="reset" >Reset</button>
+    </form>
+    
+    <script>
+       function submission(event){
+        event.preventDefault();
+        resetErrors();
+        const name=document.getElementById('name').value;
+        const username=document.getElementById('username').value;
+        const email=document.getElementById('email').value;
+        const phone=document.getElementById('phone').value;
+        const password=document.getElementById('password').value;
+        const repassword =document.getElementById('repassword').value;
+
+        
+        if(!isusernamevalid(username))
+        {
+            displayError('usernameError','User name must have atleast 3 characters');
+            return;
+        }
+        if(!isphonevalid(phone))
+        {
+            displayError('phoneError','Invalid phone number');
+            return;
+        }
+        if(!isemailvalid(email))
+        {
+            displayError('emailerror','Invalid email address');
+            return;
+        }
+        if(!ispasswordvalid(password))
+        {
+            displayError('passworderror','Password must contain atleast 8 characters');
+            return;
+        }
+        if(password!==repassword)
+        {
+            displayError('repassworderror','Passwords do not match ');
+            return;
+        }
+        
+       alert('Form submitted successfully!')
+    }
+
+    function isusernamevalid(username)
+    {
+       return username.length>=3;
+    }
+    function isphonevalid(phone)
+    {
+       return phone.length==10;
+    }
+    function isemailvalid(email)
+    {
+        const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    function ispasswordvalid(password)
+    {
+        return password.length>=8;
+    }
+
+    function displayError(elementId, errorMessage) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.innerText = errorMessage;
+    }
+    function resetErrors() {
+        const errorElements = document.querySelectorAll('.error');
+        errorElements.forEach(element => {
+            element.innerText = '';
+        });
+    }
+
+    </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
